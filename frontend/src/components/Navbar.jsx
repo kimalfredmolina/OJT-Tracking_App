@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { auth } from '../firebase'
 import { signOut } from 'firebase/auth'
 
-const Navbar = ({ isDark, toggleTheme, onAddLog }) => {
+const Navbar = ({ isDark, toggleTheme, onAddLog, onOpenAccount }) => {
   const user = auth.currentUser
   const [dropOpen, setDropOpen] = useState(false)
   const dropRef = useRef(null)
@@ -27,7 +27,7 @@ const Navbar = ({ isDark, toggleTheme, onAddLog }) => {
 
   return (
     <header
-      className="sticky top-0 z-30 backdrop-blur-md"
+      className="fixed top-0 left-0 w-full z-30 backdrop-blur-md"
       style={{
         backgroundColor: 'var(--bg-80)',
         borderBottom: '1px solid var(--border)',
@@ -55,19 +55,6 @@ const Navbar = ({ isDark, toggleTheme, onAddLog }) => {
         </div>
 
         <div className="flex items-center gap-2">
-
-          {/* Export */}
-          <button
-            className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 text-[0.8rem] rounded-lg transition-all duration-200"
-            style={{ color: 'var(--muted)', border: '1px solid var(--border)' }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.color = 'var(--accent)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--muted)' }}
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            Export
-          </button>
 
           {/* mobile view */}
           <button
@@ -158,6 +145,10 @@ const Navbar = ({ isDark, toggleTheme, onAddLog }) => {
                 </button>
                 <button
                   id="menu-account"
+                  onClick={() => {
+                    onOpenAccount?.()
+                    setDropOpen(false)
+                  }}
                   className="w-full flex items-center gap-3 px-4 py-2.5 text-[0.8rem] text-left transition-colors hover:opacity-80"
                   style={{ color: 'var(--muted)', borderTop: '1px solid var(--border)' }}
                 >
