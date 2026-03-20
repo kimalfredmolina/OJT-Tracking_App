@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import { formatHours } from '../utils/format'
 
 /**
  * WeeklySummary
@@ -57,7 +58,7 @@ const WeeklySummary = ({ weeks = [] }) => {
           >
             <div className="flex items-center justify-between mb-2">
               <span className="text-[0.78rem] font-medium" style={{ color: 'var(--text)' }}>{wk.label}</span>
-              <span className="text-[0.72rem] font-semibold" style={{ color: 'var(--accent)' }}>{wk.total} hrs</span>
+              <span className="text-[0.72rem] font-semibold" style={{ color: 'var(--accent)' }}>{formatHours(wk.total)} hrs</span>
             </div>
 
             <div className="w-full h-1 rounded-full mb-3" style={{ backgroundColor: 'rgba(128,128,128,0.1)' }}>

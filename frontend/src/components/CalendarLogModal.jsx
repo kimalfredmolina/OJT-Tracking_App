@@ -1,4 +1,5 @@
 import React from 'react'
+import { formatHours } from '../utils/format'
 
 const CalendarLogModal = ({ isOpen, onClose, dateLabel, logs = [], onEdit, onAdd }) => {
   if (!isOpen) return null
@@ -56,7 +57,7 @@ const CalendarLogModal = ({ isOpen, onClose, dateLabel, logs = [], onEdit, onAdd
                   </div>
                   <div>
                     <div className="text-[0.65rem] uppercase tracking-wider" style={{ color: 'var(--muted)' }}>Hours</div>
-                    <div style={{ color: 'var(--text)' }}>{log.hours ?? 0} hrs</div>
+                    <div style={{ color: 'var(--text)' }}>{formatHours(log.hours)} hrs</div>
                   </div>
                 </div>
                 <div className="mt-3">

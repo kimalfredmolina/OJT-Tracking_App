@@ -1,4 +1,5 @@
 import React from 'react'
+import { formatHours } from '../utils/format'
 
 /**
  * StatCard
@@ -9,6 +10,24 @@ import React from 'react'
  * @prop {ReactNode} icon    – SVG path(s) rendered inside a 24×24 viewBox
  * @prop {boolean} highlight – accent colour treatment
  */
+const formatStatValue = (value) => {
+  if (value === null || value === undefined) return ''
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return formatHours(value)
+  }
+  if (typeof value === 'string') {
+    const trimmed = value.trim()
+    const match = trimmed.match(/^(-?\d+(?:\.\d+)?)(.*)$/)
+    if (match) {
+      const num = Number(match[1])
+      if (Number.isFinite(num)) {
+        return `${formatHours(num)}${match[2]}`
+      }
+    }
+  }
+  return value
+}
+
 const StatCard = ({ id, label, value, sub, icon, highlight = false, onIconClick, iconTitle, iconAccent = false }) => (
   <div id={id} className="rounded-2xl px-4 sm:px-5 py-4 sm:py-5 flex flex-col gap-2.5 cursor-default" style={{ backgroundColor: 'var(--surface)', border: highlight ? '1px solid rgba(200,184,154,0.40)' : '1px solid var(--border)', transition: 'box-shadow 0.2s, transform 0.2s',}}
     onMouseEnter={e => { e.currentTarget.style.boxShadow = 'var(--shadow-card)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
@@ -39,7 +58,7 @@ const StatCard = ({ id, label, value, sub, icon, highlight = false, onIconClick,
       )}
     </div>
 
-    <div className="text-[1.3rem] sm:text-[1.6rem] font-semibold tracking-tight leading-none" style={{ color: highlight ? 'var(--accent)' : 'var(--text)' }} >{value}</div>
+    <div className="text-[1.3rem] sm:text-[1.6rem] font-semibold tracking-tight leading-none" style={{ color: highlight ? 'var(--accent)' : 'var(--text)' }} >{formatStatValue(value)}</div>
 
     <p className="text-[0.7rem]" style={{ color: 'var(--muted)' }}>{sub}</p>
   </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { formatHours } from '../utils/format'
 
 /**
  * ProgressBar
@@ -13,7 +14,7 @@ const ProgressBar = ({ completed, required, avgDaily }) => {
     <div className="rounded-2xl px-5 sm:px-6 py-4 sm:py-5" style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}>
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-[0.75rem] font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Progress</h2>
-        <span className="text-[0.72rem]" style={{ color: 'var(--muted)' }}>Avg daily:{' '}<span className="font-semibold" style={{ color: 'var(--accent)' }}>{avgDaily} hrs</span></span>
+        <span className="text-[0.72rem]" style={{ color: 'var(--muted)' }}>Avg daily:{' '}<span className="font-semibold" style={{ color: 'var(--accent)' }}>{formatHours(avgDaily)} hrs</span></span>
       </div>
 
       <div className="w-full h-2.5 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(128,128,128,0.1)' }}>
@@ -21,7 +22,7 @@ const ProgressBar = ({ completed, required, avgDaily }) => {
       </div>
 
       <div className="flex justify-between mt-2">
-        <p className="text-[0.72rem]" style={{ color: 'var(--muted)' }}><span className="font-medium" style={{ color: 'var(--accent)' }}>{completed} hrs</span>{' '}/ {required} hrs</p>
+        <p className="text-[0.72rem]" style={{ color: 'var(--muted)' }}><span className="font-medium" style={{ color: 'var(--accent)' }}>{formatHours(completed)} hrs</span>{' '}/ {formatHours(required)} hrs</p>
         <p className="text-[0.72rem]" style={{ color: 'var(--muted)' }}>{pct}%</p>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { addBulkLogs, getCurrentUser } from '../firebase'
 import DatePicker from './DatePicker'
+import { formatHours } from '../utils/format'
 
 const PAD = (n) => String(n).padStart(2, '0')
 const timeToMin = (h, m) => h * 60 + m
@@ -149,7 +150,7 @@ const BulkAddModal = ({ isOpen, onClose, onSave }) => {
                       <circle cx="12" cy="12" r="10" /><path strokeLinecap="round" d="M12 8v4l3 3" />
                     </svg>
                     <p className="text-[0.77rem] leading-relaxed" style={{ color: 'var(--accent)' }}>
-                      You worked for <strong>{raw.toFixed(1)} hrs</strong>. Only <strong>{net.toFixed(1)} hrs</strong> counted due to <strong>{entry.breakHr || 0} hr</strong> break.
+                      You worked for <strong>{formatHours(raw)} hrs</strong>. Only <strong>{formatHours(net)} hrs</strong> counted due to <strong>{entry.breakHr || 0} hr</strong> break.
                     </p>
                   </div>
                 )

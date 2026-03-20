@@ -1,4 +1,5 @@
 import React from 'react'
+import { formatHours } from '../utils/format'
 
 /**
  * ActivityTable
@@ -108,7 +109,7 @@ const ActivityTable = ({ logs = [], onAddLog, onBulkAdd, onExport, onViewNote, o
           {logs.map((log, i) => (
             <tr key={log.id} className="transition-colors" style={{ borderBottom: i !== logs.length - 1 ? '1px solid var(--border)' : 'none' }} onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(128,128,128,0.04)'} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
               <td className="px-5 sm:px-6 py-3.5 font-medium" style={{ color: 'var(--accent)' }}>{log.displayDate ?? log.date}</td>
-              <td className="px-5 sm:px-6 py-3.5" style={{ color: 'var(--text)' }}>{log.hours} hrs</td>
+              <td className="px-5 sm:px-6 py-3.5" style={{ color: 'var(--text)' }}>{formatHours(log.hours)} hrs</td>
               <td className="px-5 sm:px-6 py-3.5" style={{ color: 'var(--muted)' }}>
                 <div className="space-y-1">
                   <p className="notes-clamp-mobile">{log.notes}</p>

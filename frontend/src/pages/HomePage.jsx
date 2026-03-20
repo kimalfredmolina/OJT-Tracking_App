@@ -50,7 +50,7 @@ const buildWeeklySummaries = (logs) => {
     .sort((a, b) => (a.key > b.key ? 1 : -1))
     .map((w, i) => ({
       label: `Week ${i + 1}`,
-      total: Math.round(w.total * 10) / 10,
+      total: Math.round(w.total * 100) / 100,
       tasks: w.tasks.slice(0, 5),
     }))
 }

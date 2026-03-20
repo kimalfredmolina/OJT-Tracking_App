@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { addLog, deleteLog, getCurrentUser, updateLog } from '../firebase'
 import DatePicker from './DatePicker'
+import { formatHours } from '../utils/format'
 
 const PAD = (n) => String(n).padStart(2, '0')
 
@@ -187,7 +188,7 @@ const AddLogModal = ({ isOpen, onClose, onSave, isDark, initialLog = null, initi
               <path strokeLinecap="round" d="M12 8v4l3 3" />
             </svg>
             <p className="text-[0.77rem] leading-relaxed" style={{ color: isDark ? '#c8b89a' : '#8a6a40' }}>
-              You worked for <strong>{rawHours.toFixed(1)} hrs</strong>. Only <strong>{computedHours.toFixed(1)} hrs</strong> counted due to <strong>{breakHr} hr</strong> break.
+              You worked for <strong>{formatHours(rawHours)} hrs</strong>. Only <strong>{formatHours(computedHours)} hrs</strong> counted due to <strong>{breakHr} hr</strong> break.
             </p>
           </div>
 

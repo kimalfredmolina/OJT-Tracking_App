@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import { formatHours } from '../utils/format'
 
 const AccountPage = ({ user, logs = [], settings, onBack, onDelete }) => {
   const totalHours = useMemo(
@@ -78,11 +79,11 @@ const AccountPage = ({ user, logs = [], settings, onBack, onDelete }) => {
             </div>
             <div>
               <p className="theme-muted text-[0.7rem] uppercase tracking-widest">Total Hours</p>
-              <p className="theme-text text-lg">{Math.round(totalHours * 10) / 10}</p>
+              <p className="theme-text text-lg">{formatHours(totalHours)}</p>
             </div>
             <div>
               <p className="theme-muted text-[0.7rem] uppercase tracking-widest">Required</p>
-              <p className="theme-text text-lg">{settings?.requiredHours ?? 500} hrs</p>
+              <p className="theme-text text-lg">{formatHours(settings?.requiredHours ?? 500)} hrs</p>
             </div>
             <div>
               <p className="theme-muted text-[0.7rem] uppercase tracking-widest">Latest Log</p>
@@ -145,7 +146,7 @@ const AccountPage = ({ user, logs = [], settings, onBack, onDelete }) => {
                   onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
                 >
                   <td className="px-6 py-3.5 font-medium" style={{ color: 'var(--accent)' }}>{log.displayDate ?? log.date}</td>
-                  <td className="px-6 py-3.5" style={{ color: 'var(--text)' }}>{log.hours} hrs</td>
+                  <td className="px-6 py-3.5" style={{ color: 'var(--text)' }}>{formatHours(log.hours)} hrs</td>
                   <td className="px-6 py-3.5" style={{ color: 'var(--muted)' }}>{log.notes}</td>
                 </tr>
               ))}
